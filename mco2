@@ -1,0 +1,115 @@
+%ask if M or F because breast
+go:-
+    hypothesis(Disease),
+    write('It is suggested that the patient is suffering from '),
+    write(Disease),
+    nl,
+    undo;
+    write('Sorry, the system is unable to identify the disease'),nl,undo.
+    
+    
+    hypothesis(filariasis) :-
+    symptom(fever),
+    symptom(pain_and_swelling_of_the_breast),
+    symptom(pain_and_swelling_of_the_vagina),
+    symptom(pain_and_swelling_of_the_scrotum),
+    symptom(pain_and_swelling_of_the_legs),
+    symptom(pain_and_swelling_of_the_arms),
+    symptom(cough),
+    symptom(shortness_of_breath),
+    symptom(wheezing),
+    nl,
+    write('Description:'),
+    nl,
+    write('Lymphatic filariasis, considered globally as a neglected tropical disease (NTD), is a parasitic disease caused by microscopic, thread-like worms. The adult worms only live in the human lymph system. The lymph system maintains the body’s fluid balance and fights infections. Lymphatic filariasis is spread from person to person by mosquitoes.'),
+    nl,
+    write('Symptoms:'),
+    nl,
+    write('Pain and swelling of the breast, vagina, scrotum, legs and arms:  Fluid collection because of improper functioning of the lymph system.'),
+    nl,
+    write('Fever, Cough, shortness of breath, and wheezing: Filarial infection can also cause tropical pulmonary eosinophilia  syndrome, although this syndrome is typically found in persons living with the disease in Asia. Eosinophilia is the presence of higher than normal disease-fighting white blood cells in the body.'),
+    nl,
+    write('To confirm this diagnosis, the following test is recommended:'),
+    nl,
+    tab(1),
+    write('Microscopic Examination: Identification of microfilariae in a blood smear.'),
+    nl,
+    write('Suggested Treatment:'),
+    nl,
+    write('DEC (Diethylcarbamazine Citrate) and Albendazole- Selective treatment with DEC (Diethylcarbamazine Citrate) is given to people with clinical manifestations of the disease. Mass treatment of the people living in established endemic areas. Medicines (DEC and albendazole) are given once a year for 5 years.'),
+    nl,
+    write('For Future Prevention:'),
+    nl,
+    write('Wear a long sleeve shirt and long pants when working in farms or areas endemic to filariasis.'),
+    nl,
+    write('Sleep under a mosquito net.'),
+    nl, !.
+    
+    hypothesis(acute_gastroenteritis) :-
+    symptom(diarrhea),
+    symptom(abdominal_pain),
+    symptom(fever),
+    symptom(fatigue),
+    symptom(nausea),
+    symptom(vomiting),
+    nl,
+    write('Description:'),
+    nl,
+    write('Acute gastroenteritis, known colloquially as a stomach bug, is an intestinal inflammation following an infection that affects the mucous membranes present in the stomach and intestine. This condition is due, in the vast majority of cases, to a virus or, more rarely, a bacterium. '),
+    nl,
+    write('Symptoms:'),
+    nl,
+    write('1: Fever'),
+    nl,
+    write('2: Fatigue'),
+    nl,
+    write('3: Nausea or Vomiting'),
+    nl,
+    write('4: Diarrhea'),
+    nl,
+    write('5: Abdominal pain'),
+    nl,
+    write('To confirm this diagnosis, the following test is recommended:'),
+    nl,
+    write('In case of an episode lasting beyond one week or where symptoms are poorly tolerated, a doctor will order a blood and stool exam so as to search for a possible bacterial infection.'),
+    nl,
+    write('Suggested Treatment:'),
+    nl,
+    write('1: Recommended Bed Rest'),
+    nl,
+    write('2: No medication needed  '),
+    nl,
+    write('3: Anti-diarrheal or Emetic Drugs (for severe cases)'),
+    nl,
+    write('For Future Prevention'),
+    nl,
+    write('1: Practice simple things like washing your hands routinely with soap and water, after using the toilet, or after contact with an infected person'),
+    nl,
+    write('2: Wash fruits and vegetables before eating them.'),
+    nl,!.
+    
+    
+    ask(Question) :-
+    write('Is the patient suffering  from:  '),
+    write(Question),
+    write('? : '),
+    read(Response),
+    nl,
+    ( (Response == yes ; Response == y)
+    ->
+    assert(yes(Question)) ;
+    assert(no(Question)), fail).
+    :- dynamic yes/1,no/1.
+    
+    symptom(S) :-
+    (yes(S)
+    ->
+    true ;
+    (no(S)
+    ->
+    fail ;
+    ask(S))).
+    
+    undo :- retract(yes(_)),fail.
+    undo :- retract(no(_)),fail.
+    undo.
