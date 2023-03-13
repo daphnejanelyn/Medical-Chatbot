@@ -127,6 +127,7 @@ go :-
         write('Is the patient suffering from '),
         write(Question),
         write('? '),
+        prompt(_, ''),
         read(Response),
         ((Response == yes ; Response == y)->
             assert(yes(Question)) ;
