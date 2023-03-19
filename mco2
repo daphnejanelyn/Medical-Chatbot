@@ -3,6 +3,7 @@ go :-
     retractall(no(_)),
     (hypothesis(Disease)  % Check for a diagnosis
     ->
+        nl,
         write('Based on the description and symptoms above, it is suggested that the patient is suffering from '),
         write(Disease),
         nl,
@@ -24,11 +25,10 @@ go :-
     
     % Disease 1: Filariasis
     hypothesis(filariasis) :-
-        % Disease 1: Filariasis
         symptom('pain and swelling of the genitalia (breast, vagina or scrotum)'),
         symptom('pain and swelling of the legs and arms'),
         symptom('fever'),
-        symptom('cough'),
+        symptom('coughing'),
         symptom('shortness of breath'),
         symptom('wheezing'),
         nl,
@@ -226,11 +226,11 @@ go :-
     
     % Disease 5: GERD
     hypothesis('Gastroesophageal reflux disease') :-
-        symptom('Burning Sensation or Heartburn'),
-        symptom('Backwash of sour liquid'),
-        symptom('Abdominal pain'),
-        symptom('Dysphagia or Trouble swallowing'),
-        symptom('Throat lump'),
+        symptom('burning sensation or heartburn'),
+        symptom('backwash of sour liquid'),
+        symptom('abdominal pain'),
+        symptom('dysphagia or trouble swallowing'),
+        symptom('throat lumps'),
         nl,
         nl,
         write('Description:'),
@@ -282,7 +282,7 @@ go :-
     
     % Disease 6: Tuberculosis
     hypothesis('tuberculosis') :-
-        symptom('cough'),
+        symptom('coughing'),
         symptom('chest pain'),
         symptom('coughing up of blood'),
         symptom('fever'),
@@ -296,7 +296,7 @@ go :-
         nl,
         write('Symptoms:'),
         nl,
-        write('1: Cough'),
+        write('1: Coughing'),
         nl,
         write('2: Chest pain'),
         nl,
@@ -390,7 +390,7 @@ go :-
         symptom('painful muscle stiffness all over the body'),
         symptom('trouble swallowing'),
         symptom('seizures (jerking or staring)'),
-        symptom('headaches'),
+        symptom('headache'),
         symptom('fever'),
         symptom('sweating'),
         symptom('changes in blood pressure and heart rate'),
