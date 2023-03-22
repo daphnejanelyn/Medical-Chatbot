@@ -1,8 +1,18 @@
 go :-
     retractall(yes(_)),  % Remove any previous diagnosis answers
     retractall(no(_)),
+    write('What is the patient\'s name? '),
+    read(PatientName),
+    write('What is your age? '),
+    read(PatientAge),
     (hypothesis(Disease)  % Check for a diagnosis
     ->
+        nl,
+        write('Name: '),
+        write(PatientName),
+        nl,
+        write('Age: '),
+        write(PatientAge),
         nl,
         write('Based on the description and symptoms above, it is suggested that the patient is suffering from '),
         write(Disease),
@@ -12,6 +22,7 @@ go :-
         write('Sorry, the system is unable to identify the disease'),
         nl,
         diagnose_again).
+
     diagnose_again :-
         nl,
         write('Do you want to perform another diagnosis? (yes or no)'),
@@ -27,10 +38,11 @@ go :-
     hypothesis(filariasis) :-
         symptom('pain and swelling of the genitalia (breast, vagina or scrotum)'),
         symptom('pain and swelling of the legs and arms'),
-        symptom('fever'),
-        symptom('coughing'),
-        symptom('shortness of breath'),
-        symptom('wheezing'),
+        (symptom('fever') ;
+        symptom('coughing');
+        symptom('shortness of breath') ;
+        symptom('wheezing')),
+        nl,
         nl,
         nl,
         write('Description:'),
@@ -66,10 +78,10 @@ go :-
     hypothesis('chicken pox') :-
         symptom('fluid-filled blisters'),
         symptom('rash'),
-        symptom('fever'),
-        symptom('tiredness'),
-        symptom('loss of appetite'),
-        symptom('headache'),
+        (symptom('fever');
+        symptom('tiredness');
+        symptom('loss of appetite');
+        symptom('headache')),
         nl,
         nl,
         write('Description:'),
@@ -124,10 +136,10 @@ go :-
     hypothesis('dengue fever') :-
         symptom('fever'),
         symptom('bleeding from nose or gums'),
-        symptom('nausea or vomiting'),
-        symptom('rash'),
-        symptom('eye, muscle and bone pain'),
-        symptom('belly pain'),
+        (symptom('nausea or vomiting'),
+        symptom('rash');
+        symptom('eye, muscle and bone pain');
+        symptom('belly pain')),
         nl,
         nl,
         write('Description:'),
@@ -178,9 +190,9 @@ go :-
     % Disease 4: Amoebiasis
     hypothesis('amoebiasis') :-
         symptom('loose feces'),
-        symptom('stomach pain'),
         symptom('bloody stools'),
-        symptom('fever'),
+        (symptom('stomach pain');
+        symptom('fever')),
         nl,
         nl,
         write('Description:'),
@@ -228,9 +240,9 @@ go :-
     hypothesis('Gastroesophageal reflux disease') :-
         symptom('burning sensation or heartburn'),
         symptom('backwash of sour liquid'),
-        symptom('abdominal pain'),
-        symptom('dysphagia or trouble swallowing'),
-        symptom('throat lumps'),
+        (symptom('abdominal pain');
+        symptom('dysphagia or trouble swallowing');
+        symptom('throat lumps')),
         nl,
         nl,
         write('Description:'),
@@ -282,11 +294,10 @@ go :-
     
     % Disease 6: Tuberculosis
     hypothesis('tuberculosis') :-
-        symptom('coughing'),
         symptom('chest pain'),
         symptom('coughing up of blood'),
-        symptom('fever'),
-        symptom('night sweats'),
+        (symptom('fever');
+        symptom('night sweats')),
         nl,
         nl,
         write('Description:'),
@@ -336,13 +347,13 @@ go :-
     
     % Disease 7: Rabies
     hypothesis('rabies') :-
-        symptom('fever'),
-        symptom('headache'),
-        symptom('itching'),
         symptom('cerebal dysfunction'),
         symptom('anxiety, confusion and agitiation'),
         symptom('delirium and hallicinations'),
-        symptom('hyrdophobia and insomnia'),
+        (symptom('hyrdophobia and insomnia');
+        symptom('fever');
+        symptom('headache');
+        symptom('itching')),
         nl,
         nl,
         write('Description:'),
@@ -390,10 +401,10 @@ go :-
         symptom('painful muscle stiffness all over the body'),
         symptom('trouble swallowing'),
         symptom('seizures (jerking or staring)'),
-        symptom('headache'),
-        symptom('fever'),
-        symptom('sweating'),
-        symptom('changes in blood pressure and heart rate'),
+        (symptom('headache');
+        symptom('fever');
+        symptom('sweating');
+        symptom('changes in blood pressure and heart rate')),
         nl,
         nl,
         write('Description:'),
@@ -456,10 +467,10 @@ go :-
         
     % Disease 9: Asthma
     hypothesis('asthma') :-
-        symptom('coughing'),
-        symptom('chest tightness'),
-        symptom('wheezing'),
         symptom('trouble breathing'),
+        symptom('wheezing'),
+        (symptom('coughing');
+        symptom('chest tightness')),
         nl,
         nl,
         write('Description:'),
@@ -501,10 +512,10 @@ go :-
     hypothesis('acute gastroenteritis') :-
         symptom('diarrhea'),
         symptom('abdominal pain'),
-        symptom('fever'),
-        symptom('fatigue'),
-        symptom('nausea'),
-        symptom('vomiting'),
+        (symptom('fever');
+        symptom('fatigue');
+        symptom('nausea');
+        symptom('vomiting')),
         nl,
         nl,
         write('Description:'),
