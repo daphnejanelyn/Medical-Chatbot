@@ -36,12 +36,12 @@ go :-
     
     % Disease 1: Filariasis
     hypothesis(filariasis) :-
-        symptom('pain and swelling of the genitalia (breast, vagina or scrotum)'),
-        symptom('pain and swelling of the legs and arms'),
         (symptom('fever') ;
         symptom('coughing');
         symptom('shortness of breath') ;
         symptom('wheezing')),
+        symptom('pain and swelling of the genitalia (breast, vagina or scrotum)'),
+        symptom('pain and swelling of the legs and arms'),
         nl,
         nl,
         nl,
@@ -76,12 +76,12 @@ go :-
     
     % Disease 2: Chicken Pox
     hypothesis('chicken pox') :-
-        symptom('fluid-filled blisters'),
-        symptom('rash'),
         (symptom('fever');
         symptom('tiredness');
         symptom('loss of appetite');
         symptom('headache')),
+        symptom('fluid-filled blisters'),
+        symptom('rash'),
         nl,
         nl,
         write('Description:'),
@@ -134,17 +134,21 @@ go :-
         
     % Disease 3: Dengue Fever
     hypothesis('dengue fever') :-
-        symptom('fever'),
-        symptom('bleeding from nose or gums'),
         (symptom('nausea or vomiting'),
         symptom('rash');
         symptom('eye, muscle and bone pain');
         symptom('belly pain')),
+        symptom('fever'),
+        symptom('bleeding from nose or gums'),
         nl,
         nl,
         write('Description:'),
         nl,
-        write('A blood test is the only way to confirm the diagnosis.'),
+        write('Dengue viruses are spread to people through the bite of an infected Aedes species 
+            (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, 
+            and other viruses. Dengue viruses are spread to people through the bite of an 
+            infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. 
+            These mosquitoes also spread Zika, chikungunya, and other viruses.'),
         nl,
         nl,
         write('Symptoms:'),
@@ -189,10 +193,10 @@ go :-
     
     % Disease 4: Amoebiasis
     hypothesis('amoebiasis') :-
-        symptom('loose feces'),
-        symptom('bloody stools'),
         (symptom('stomach pain');
         symptom('fever')),
+        symptom('loose feces'),
+        symptom('bloody stools'),
         nl,
         nl,
         write('Description:'),
@@ -238,11 +242,11 @@ go :-
     
     % Disease 5: GERD
     hypothesis('Gastroesophageal reflux disease') :-
-        symptom('burning sensation or heartburn'),
-        symptom('backwash of sour liquid'),
         (symptom('abdominal pain');
         symptom('dysphagia or trouble swallowing');
         symptom('throat lumps')),
+        symptom('burning sensation or heartburn'),
+        symptom('backwash of sour liquid'),
         nl,
         nl,
         write('Description:'),
@@ -294,10 +298,10 @@ go :-
     
     % Disease 6: Tuberculosis
     hypothesis('tuberculosis') :-
-        symptom('chest pain'),
-        symptom('coughing up of blood'),
         (symptom('fever');
         symptom('night sweats')),
+        symptom('chest pain'),
+        symptom('coughing up of blood'),
         nl,
         nl,
         write('Description:'),
@@ -347,13 +351,13 @@ go :-
     
     % Disease 7: Rabies
     hypothesis('rabies') :-
-        symptom('cerebal dysfunction'),
-        symptom('anxiety, confusion and agitiation'),
-        symptom('delirium and hallicinations'),
         (symptom('hyrdophobia and insomnia');
         symptom('fever');
         symptom('headache');
         symptom('itching')),
+        symptom('cerebal dysfunction'),
+        symptom('anxiety, confusion and agitiation'),
+        symptom('delirium and hallicinations'),
         nl,
         nl,
         write('Description:'),
@@ -397,14 +401,14 @@ go :-
 
     % Disease 8: Tetanus
     hypothesis('tetanus') :-
-        symptom('sudden, involuntary muscle spasms - often in the stomach'),
-        symptom('painful muscle stiffness all over the body'),
-        symptom('trouble swallowing'),
-        symptom('seizures (jerking or staring)'),
         (symptom('headache');
         symptom('fever');
         symptom('sweating');
         symptom('changes in blood pressure and heart rate')),
+        symptom('sudden, involuntary muscle spasms - often in the stomach'),
+        symptom('painful muscle stiffness all over the body'),
+        symptom('trouble swallowing'),
+        symptom('seizures (jerking or staring)'),
         nl,
         nl,
         write('Description:'),
@@ -467,10 +471,10 @@ go :-
         
     % Disease 9: Asthma
     hypothesis('asthma') :-
-        symptom('trouble breathing'),
-        symptom('wheezing'),
         (symptom('coughing');
         symptom('chest tightness')),
+        symptom('trouble breathing'),
+        symptom('wheezing'),
         nl,
         nl,
         write('Description:'),
@@ -510,12 +514,12 @@ go :-
 
     % Disease 10: Acute Gastroenteritis
     hypothesis('acute gastroenteritis') :-
-        symptom('diarrhea'),
-        symptom('abdominal pain'),
         (symptom('fever');
         symptom('fatigue');
         symptom('nausea');
         symptom('vomiting')),
+        symptom('diarrhea'),
+        symptom('abdominal pain'),
         nl,
         nl,
         write('Description:'),
