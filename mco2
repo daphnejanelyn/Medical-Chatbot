@@ -1,12 +1,22 @@
 go :-
     retractall(yes(_)),  % Remove any previous diagnosis answers
     retractall(no(_)),
-    write('What is the patient\'s name? '),
+    write('---BASIC INFORMATION---\n'),
+    write('\nPlease input the following basic information for recording purposes.\nKindly enclose the answer in quotations ("")\n\n'),
+    write('Name: '),
     read(PatientName),
-    write('What is your age? '),
+    prompt(_, ''),
+    write('Age: '),
     read(PatientAge),
+    prompt(_, ''),
+    
+    write('\n---INTERVIEW QUESTIONS---\n'),
+    write('\nPlease answer the following questions as part of the interview process to ascertain the disease.\n'),
+    write('Kindly type "yes" or "y" (without the quotations) for yes and\n"no" or "n" (without the quotations) for no\n\n'),
+    
     (hypothesis(Disease)  % Check for a diagnosis
     ->
+        write('\n---DIAGNOSIS---\n'),
         nl,
         write('Name: '),
         write(PatientName),
@@ -19,7 +29,7 @@ go :-
         nl,
         diagnose_again  % Ask the user if they want to diagnose again
         ;
-        write('Sorry, the system is unable to identify the disease'),
+        write('\nSorry, the system is unable to identify the disease'),
         nl,
         diagnose_again).
 
@@ -34,7 +44,107 @@ go :-
         ;
         write('Thank you for using the diagnosis system.')).
     
-    % Disease 1: Filariasis
+    % Disease 1: Amoebiasis
+    hypothesis('amoebiasis') :-
+        (symptom('fever');
+        symptom('abdominal pain')),
+        symptom('diarrhea'),
+        symptom('bloody stools'),
+        nl,
+        write('\n---DISEASE INFORMATION---\n'),
+        nl,
+        write('Description:'),
+        nl,
+        write('Amoebiasis or amoebic dysentery is a common parasitic enteral infection. It is caused by any of the amoebas of the Entamoeba group. If the parasite reaches the bloodstream, it can spread through the body and end up in the liver, causing amoebic liver abscesses. Liver abscesses can occur without previous diarrhea. Diagnosis is typically by stool examination using a microscope. An increased WBC count may be present. The most accurate test is specific antibodies in the blood.'),
+        nl,
+        nl,
+        write('Symptoms:'),
+        nl,
+        write('1: Loose Feces'),
+        nl,
+        write('2: Stomach Pain'),
+        nl,
+        write('3: Bloody stools'),
+        nl,
+        write('4: Fever'),
+        nl,
+        nl,
+        write('To confirm this diagnosis, the following test is recommended:'),
+        nl,
+        write('Examination of stools (poop) under a microscope Because E. histolytica is not always found in every stool sample, you may be asked to submit several stool samples from several different days.'),
+        nl,
+        nl,
+        write('Suggested Treatment:'),
+        nl,
+        write('1: Metronidazole'),
+        nl,
+        write('2: Tinidazole'),
+        nl,
+        write('3: Nitazoxanide'),
+        nl,
+        write('4: Dehydroemetine'),
+        nl,
+        write('5: Chloroquine'),
+        nl,
+        nl,
+        write('For Future Prevention:'),
+        nl,
+        write('Practice good sanitation practices'),
+        nl,
+        write('Drink only safe to drink water'),
+        nl, !.
+    
+    % Disease 2: Acute Gastroenteritis
+    hypothesis('acute gastroenteritis') :-
+        (symptom('fever');
+        symptom('nausea');
+        symptom('vomiting');
+        symptom('fatigue')),
+        symptom('diarrhea'),
+        symptom('abdominal pain'),
+        nl,
+        write('\n---DISEASE INFORMATION---\n'),
+        nl,
+        write('Description:'),
+        nl,
+        write('Acute gastroenteritis, known colloquially as a stomach bug, is an intestinal inflammation following an infection that affects the mucous membranes present in the stomach and intestine. This condition is due, in the vast majority of cases, to a virus or, more rarely, a bacterium. '),
+        nl,
+        nl,
+        write('Symptoms:'),
+        nl,
+        write('1: Fever'),
+        nl,
+        write('2: Fatigue'),
+        nl,
+        write('3: Nausea or Vomiting'),
+        nl,
+        write('4: Diarrhea'),
+        nl,
+        write('5: Abdominal pain'),
+        nl,
+        nl,
+        write('To confirm this diagnosis, the following test is recommended:'),
+        nl,
+        write('In case of an episode lasting beyond one week or where symptoms are poorly tolerated, a doctor will order a blood and stool exam so as to search for a possible bacterial infection.'),
+        nl,
+        nl,
+        write('Suggested Treatment:'),
+        nl,
+        write('1: Recommended Bed Rest'),
+        nl,
+        write('2: No medication needed  '),
+        nl,
+        write('3: Anti-diarrheal or Emetic Drugs (for severe cases)'),
+        nl,
+        nl,
+        write('For Future Prevention'),
+        nl,
+        write('1: Practice simple things like washing your hands routinely with soap and water, after using the toilet, or after contact with an infected person'),
+        nl,
+        write('2: Wash fruits and vegetables before eating them.'),
+        nl,!.
+
+    % Disease 3: Filariasis
     hypothesis(filariasis) :-
         (symptom('fever') ;
         symptom('coughing');
@@ -43,7 +153,7 @@ go :-
         symptom('pain and swelling of the genitalia (breast, vagina or scrotum)'),
         symptom('pain and swelling of the legs and arms'),
         nl,
-        nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -74,7 +184,7 @@ go :-
         write('2: Sleep under a mosquito net.'),
         nl, !.
     
-    % Disease 2: Chicken Pox
+    % Disease 4: Chicken Pox
     hypothesis('chicken pox') :-
         (symptom('fever');
         symptom('tiredness');
@@ -83,6 +193,7 @@ go :-
         symptom('fluid-filled blisters'),
         symptom('rash'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -132,15 +243,17 @@ go :-
         write('Chickenpox Vaccine (Two doses):  If a vaccinated person does get chickenpox, the symptoms are usually milder with fewer or no blisters (they may have just red spots) and low or no fever.'),
         nl, !.
         
-    % Disease 3: Dengue Fever
+    % Disease 5: Dengue Fever
     hypothesis('dengue fever') :-
-        (symptom('nausea or vomiting'),
+        symptom('fever'),
+        (symptom('nausea');
+        symptom('vomiting');
         symptom('rash');
         symptom('eye, muscle and bone pain');
-        symptom('belly pain')),
-        symptom('fever'),
+        symptom('abdominal pain')),
         symptom('bleeding from nose or gums'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -191,56 +304,7 @@ go :-
         write('2: Kill mosquitoes outside your home'),
         nl, !.
     
-    % Disease 4: Amoebiasis
-    hypothesis('amoebiasis') :-
-        (symptom('stomach pain');
-        symptom('fever')),
-        symptom('loose feces'),
-        symptom('bloody stools'),
-        nl,
-        nl,
-        write('Description:'),
-        nl,
-        write('Amoebiasis or amoebic dysentery is a common parasitic enteral infection. It is caused by any of the amoebas of the Entamoeba group. If the parasite reaches the bloodstream, it can spread through the body and end up in the liver, causing amoebic liver abscesses. Liver abscesses can occur without previous diarrhea. Diagnosis is typically by stool examination using a microscope. An increased WBC count may be present. The most accurate test is specific antibodies in the blood.'),
-        nl,
-        nl,
-        write('Symptoms:'),
-        nl,
-        write('1: Loose Feces'),
-        nl,
-        write('2: Stomach Pain'),
-        nl,
-        write('3: Bloody stools'),
-        nl,
-        write('4: Fever'),
-        nl,
-        nl,
-        write('To confirm this diagnosis, the following test is recommended:'),
-        nl,
-        write('Examination of stools (poop) under a microscope Because E. histolytica is not always found in every stool sample, you may be asked to submit several stool samples from several different days.'),
-        nl,
-        nl,
-        write('Suggested Treatment:'),
-        nl,
-        write('1: Metronidazole'),
-        nl,
-        write('2: Tinidazole'),
-        nl,
-        write('3: Nitazoxanide'),
-        nl,
-        write('4: Dehydroemetine'),
-        nl,
-        write('5: Chloroquine'),
-        nl,
-        nl,
-        write('For Future Prevention:'),
-        nl,
-        write('Practice good sanitation practices'),
-        nl,
-        write('Drink only safe to drink water'),
-        nl, !.
-    
-    % Disease 5: GERD
+    % Disease 6: GERD
     hypothesis('Gastroesophageal reflux disease') :-
         (symptom('abdominal pain');
         symptom('dysphagia or trouble swallowing');
@@ -248,6 +312,7 @@ go :-
         symptom('burning sensation or heartburn'),
         symptom('backwash of sour liquid'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -296,13 +361,14 @@ go :-
         write('2: Stop smoking'),
         nl, !.
     
-    % Disease 6: Tuberculosis
+    % Disease 7: Tuberculosis
     hypothesis('tuberculosis') :-
         (symptom('fever');
         symptom('night sweats')),
         symptom('chest pain'),
         symptom('coughing up of blood'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -349,16 +415,17 @@ go :-
         write('3: Good hygiene: covering the mouth and nose when coughing or sneezing reduces the spread of TB bacteria.'),
         nl, !.
     
-    % Disease 7: Rabies
+    % Disease 8: Rabies
     hypothesis('rabies') :-
-        (symptom('hyrdophobia and insomnia');
-        symptom('fever');
+        (symptom('fever');
         symptom('headache');
+        symptom('hydrophobia and insomnia');
         symptom('itching')),
         symptom('cerebal dysfunction'),
         symptom('anxiety, confusion and agitiation'),
         symptom('delirium and hallicinations'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -399,10 +466,10 @@ go :-
         write('3: Good hygiene: covering the mouth and nose when coughing or sneezing reduces the spread of TB bacteria.'),
         nl, !.
 
-    % Disease 8: Tetanus
+    % Disease 9: Tetanus
     hypothesis('tetanus') :-
-        (symptom('headache');
-        symptom('fever');
+        (symptom('fever');
+        symptom('headache');
         symptom('sweating');
         symptom('changes in blood pressure and heart rate')),
         symptom('sudden, involuntary muscle spasms - often in the stomach'),
@@ -410,6 +477,7 @@ go :-
         symptom('trouble swallowing'),
         symptom('seizures (jerking or staring)'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -468,14 +536,14 @@ go :-
         write('2.1: Wash hands often with soap and water or use an alcohol-based hand rub if washing is not possible.'),
         nl, !.
 
-        
-    % Disease 9: Asthma
+    % Disease 10: Asthma
     hypothesis('asthma') :-
         (symptom('coughing');
         symptom('chest tightness')),
         symptom('trouble breathing'),
         symptom('wheezing'),
         nl,
+        write('\n---DISEASE INFORMATION---\n'),
         nl,
         write('Description:'),
         nl,
@@ -510,57 +578,6 @@ go :-
         nl,
         write('1: Asthma as a disease itself cannot be prevented but one can avoid common triggers to lessen asthma attacks'),
         nl,!.
-        
-
-    % Disease 10: Acute Gastroenteritis
-    hypothesis('acute gastroenteritis') :-
-        (symptom('fever');
-        symptom('fatigue');
-        symptom('nausea');
-        symptom('vomiting')),
-        symptom('diarrhea'),
-        symptom('abdominal pain'),
-        nl,
-        nl,
-        write('Description:'),
-        nl,
-        write('Acute gastroenteritis, known colloquially as a stomach bug, is an intestinal inflammation following an infection that affects the mucous membranes present in the stomach and intestine. This condition is due, in the vast majority of cases, to a virus or, more rarely, a bacterium. '),
-        nl,
-        nl,
-        write('Symptoms:'),
-        nl,
-        write('1: Fever'),
-        nl,
-        write('2: Fatigue'),
-        nl,
-        write('3: Nausea or Vomiting'),
-        nl,
-        write('4: Diarrhea'),
-        nl,
-        write('5: Abdominal pain'),
-        nl,
-        nl,
-        write('To confirm this diagnosis, the following test is recommended:'),
-        nl,
-        write('In case of an episode lasting beyond one week or where symptoms are poorly tolerated, a doctor will order a blood and stool exam so as to search for a possible bacterial infection.'),
-        nl,
-        nl,
-        write('Suggested Treatment:'),
-        nl,
-        write('1: Recommended Bed Rest'),
-        nl,
-        write('2: No medication needed  '),
-        nl,
-        write('3: Anti-diarrheal or Emetic Drugs (for severe cases)'),
-        nl,
-        nl,
-        write('For Future Prevention'),
-        nl,
-        write('1: Practice simple things like washing your hands routinely with soap and water, after using the toilet, or after contact with an infected person'),
-        nl,
-        write('2: Wash fruits and vegetables before eating them.'),
-        nl,!.
-    
     
     ask(Question) :-
         write('Is the patient suffering from '),
@@ -571,7 +588,7 @@ go :-
         ((Response == yes ; Response == y) ->
             assert(yes(Question)) ;
             assert(no(Question)), fail).
-                :- dynamic yes/1,no/1.
+                %:- dynamic yes/1,no/1.
     
     symptom(S) :-
         (yes(S) ->true;
