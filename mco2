@@ -44,12 +44,10 @@ go :-
         ;
         write('Thank you for using the diagnosis system.')).
     
-     % Disease 1: Dengue Fever
+    % Disease 1: Dengue Fever
     hypothesis('dengue fever') :-
         symptom('fever'),
-        !,
         symptom('bleeding from nose or gums'),
-        !,
         (symptom('nausea');
         symptom('vomiting');
         symptom('rash');
@@ -61,11 +59,7 @@ go :-
         nl,
         write('Description:'),
         nl,
-        write('Dengue viruses are spread to people through the bite of an infected Aedes species 
-            (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, 
-            and other viruses. Dengue viruses are spread to people through the bite of an 
-            infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. 
-            These mosquitoes also spread Zika, chikungunya, and other viruses.'),
+        write('Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, and other viruses. Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, and other viruses.'),
         nl,
         nl,
         write('Symptoms:'),
@@ -110,10 +104,8 @@ go :-
         
     % Disease 2: Amoebiasis
     hypothesis('amoebiasis') :-
-        (symptom('bloody stools')),
-        !,
-        (symptom('diarrhea')),
-        !,
+        symptom('diarrhea'),
+        symptom('bloody stools'),
         (symptom('fever');
         symptom('abdominal pain')),
         nl,
@@ -164,9 +156,7 @@ go :-
     % Disease 3: Acute Gastroenteritis
     hypothesis('acute gastroenteritis') :-
         symptom('abdominal pain'),
-        !,
         symptom('diarrhea'),
-        !,
         (symptom('fever');
         symptom('nausea');
         symptom('vomiting');
@@ -217,9 +207,7 @@ go :-
     % Disease 4: Filariasis
     hypothesis(filariasis) :-
         symptom('pain and swelling of the genitalia (breast, vagina or scrotum)'),
-        !,
         symptom('pain and swelling of the legs and arms'),
-        !,
         (symptom('fever');
         symptom('coughing');
         symptom('shortness of breath');
@@ -260,9 +248,7 @@ go :-
     % Disease 5: Chicken Pox
     hypothesis('chicken pox') :-
         symptom('fluid-filled blisters'),
-        !,
         symptom('rash'),
-        !,
         (symptom('fever');
         symptom('tiredness');
         symptom('loss of appetite');
@@ -273,8 +259,7 @@ go :-
         nl,
         write('Description:'),
         nl,
-        write('Chickenpox is a highly contagious disease caused by the varicella-zoster virus (VZV). It can cause an itchy, blister-like rash among other symptoms. The rash first appears on the chest, back, and face, and then spreads over the entire body.
-        Chickenpox can be serious, especially during pregnancy, in babies, adolescents, adults, and people with weakened immune systems (lowered ability to fight germs and sickness).'),
+        write('Chickenpox is a highly contagious disease caused by the varicella-zoster virus (VZV). It can cause an itchy, blister-like rash among other symptoms. The rash first appears on the chest, back, and face, and then spreads over the entire body. Chickenpox can be serious, especially during pregnancy, in babies, adolescents, adults, and people with weakened immune systems (lowered ability to fight germs and sickness).'),
         nl,
         write('Symptoms:'),
         nl,
@@ -324,9 +309,7 @@ go :-
     % Disease 6: GERD
     hypothesis('Gastroesophageal reflux disease') :-
         symptom('burning sensation or heartburn'),
-        !,
         symptom('backwash of sour liquid'),
-        !,
         (symptom('abdominal pain');
         symptom('dysphagia or trouble swallowing');
         symptom('throat lumps')),
@@ -384,9 +367,7 @@ go :-
     % Disease 7: Tuberculosis
     hypothesis('tuberculosis') :-
         symptom('chest pain'),
-        !,
         symptom('coughing up of blood'),
-        !,
         (symptom('fever');
         symptom('night sweats')),
         nl,
@@ -441,9 +422,7 @@ go :-
     % Disease 8: Rabies
     hypothesis('rabies') :-
         symptom('anxiety, confusion and agitiation'),
-        !,
         symptom('delirium and hallicinations'),
-        !,
         (symptom('fever');
         symptom('headache');
         symptom('hydrophobia and insomnia');
@@ -494,13 +473,9 @@ go :-
     % Disease 9: Tetanus
     hypothesis('tetanus') :-
         symptom('sudden, involuntary muscle spasms - often in the stomach'),
-        !,
         symptom('painful muscle stiffness all over the body'),
-        !,
         symptom('trouble swallowing'),
-        !,
         symptom('seizures (jerking or staring)'),
-        !,
         (symptom('fever');
         symptom('headache');
         symptom('sweating');
@@ -569,11 +544,10 @@ go :-
     % Disease 10: Asthma
     hypothesis('asthma') :-
         symptom('trouble breathing'),
-        !,
         symptom('wheezing'),
-        !,
         (symptom('coughing');
         symptom('chest tightness')),
+
         nl,
         write('---DISEASE INFORMATION---'),
         nl,
@@ -621,7 +595,6 @@ go :-
         ((Response == yes ; Response == y) ->
             assert(yes(Question)) ;
             assert(no(Question)), fail).
-  
     
     symptom(S) :-
         (yes(S) ->true;
